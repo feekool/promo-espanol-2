@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#00a896">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Feekool Español 🌴 | Учи испанский в своём сообществе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00a896;
+            --primary-dark: #007f73;
+            --secondary: #f77f00;
+            --accent: #fcbf49;
+            --light: #eae2b7;
+            --dark: #1d3557;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 168, 150, 0.15);
+            --shadow-hover: 0 8px 30px rgba(0, 168, 150, 0.25);
+            --radius: 24px;
+            --radius-lg: 32px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Inter', 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5f2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            font-size: clamp(14px, 1.8vw, 16px);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 4vw, 24px);
+        }
+        
+        /* Animated background elements */
+        .bg-decoration {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bg-decoration::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,168,150,0.08) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(247,127,0,0.08) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -20px) scale(1.05); }
+            50% { transform: translate(0, -40px) scale(1); }
+            75% { transform: translate(-20px, -20px) scale(0.95); }
+        }
+        
+        /* Header */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: clamp(16px, 3vw, 24px) 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 168, 150, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: clamp(44px, 8vw, 52px);
+            height: clamp(44px, 8vw, 52px);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(24px, 6vw, 32px);
+            color: white;
+            box-shadow: var(--shadow);
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+        }
+        .logo:hover .logo-icon {
+            transform: rotate(0deg) scale(1.05);
+        }
+        .logo-text h1 {
+            font-size: clamp(1.5rem, 4vw, 1.9rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+        .logo-text p {
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .nav-actions {
+            display: flex;
+            gap: clamp(8px, 2vw, 12px);
+            flex-wrap: wrap;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(18px, 4vw, 24px);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            min-height: 44px;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--primary-dark), #00665c);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-secondary:hover {
+            background: #f0f9f8;
+            transform: translateY(-1px);
+        }
+        .btn-accent {
+            background: linear-gradient(135deg, var(--secondary), #e66a00);
+            color: white;
+            box-shadow: 0 4px 15px rgba(247, 127, 0, 0.25);
+        }
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(247, 127, 0, 0.35);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid #e2e8f0;
+        }
+        .btn-ghost:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f8fafc;
+        }
+        .btn-lg {
+            padding: clamp(14px, 3vw, 16px) clamp(28px, 6vw, 40px);
+            font-size: clamp(1rem, 3vw, 1.1rem);
+        }
+        .btn-full-mobile {
+            width: 100%;
+            max-width: 340px;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: clamp(48px, 10vw, 80px) 0 clamp(40px, 8vw, 60px);
+            text-align: center;
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(0,168,150,0.12), rgba(247,127,0,0.12));
+            color: var(--primary-dark);
+            padding: clamp(6px, 2vw, 8px) clamp(16px, 4vw, 20px);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+            margin-bottom: clamp(20px, 4vw, 28px);
+            border: 1px solid rgba(0, 168, 150, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 168, 150, 0.3); }
+            50% { box-shadow: 0 0 0 10px rgba(0, 168, 150, 0); }
+        }
+        .hero h2 {
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: clamp(20px, 4vw, 28px);
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero h2 .highlight {
+            display: block;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: clamp(1.1em, 3vw, 1.2em);
+        }
+        .hero p {
+            font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+            color: #475569;
+            max-width: 720px;
+            margin: 0 auto clamp(28px, 6vw, 36px);
+            line-height: 1.5;
+        }
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(12px, 3vw, 16px);
+            justify-content: center;
+            margin-bottom: clamp(24px, 5vw, 32px);
+        }
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(16px, 4vw, 24px);
+            margin-top: clamp(20px, 5vw, 28px);
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+        }
+        .stat-value {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            color: #64748b;
+            text-align: center;
+        }
+        
+        /* Spanish phrase banner */
+        .phrase-banner {
+            background: linear-gradient(135deg, var(--light), #fff);
+            border-radius: var(--radius-lg);
+            padding: clamp(16px, 4vw, 24px) clamp(20px, 5vw, 32px);
+            margin: clamp(24px, 6vw, 40px) 0;
+            text-align: center;
+            border: 2px dashed var(--accent);
+        }
+        .phrase-banner .es-phrase {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .phrase-banner .es-translation {
+            color: #64748b;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+        }
+        
+        /* Sections */
+        .section {
+            padding: clamp(48px, 10vw, 72px) 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: clamp(32px, 7vw, 48px);
+        }
+        .section-title {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: clamp(12px, 3vw, 16px);
+            color: var(--dark);
+        }
+        .section-subtitle {
+            font-size: clamp(1rem, 3vw, 1.15rem);
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Feature cards with playful design */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: clamp(20px, 4vw, 28px);
+        }
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: clamp(24px, 5vw, 32px);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(0, 168, 150, 0.2);
+        }
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        .feature-icon {
+            width: clamp(56px, 12vw, 68px);
+            height: clamp(56px, 12vw, 68px);
+            background: linear-gradient(135deg, rgba(0,168,150,0.12), rgba(247,127,0,0.12));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            margin-bottom: clamp(16px, 3vw, 20px);
+        }
+        .feature-card h3 {
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
+            font-weight: 700;
+            margin-bottom: clamp(8px, 2vw, 12px);
+            color: var(--dark);
+        }
+        .feature-card p {
+            color: #475569;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            line-height: 1.5;
+            margin-bottom: clamp(16px, 3vw, 20px);
+        }
+        .feature-card .btn {
+            padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 20px);
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+        
+        /* Gamification badges */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: clamp(12px, 3vw, 16px) 0;
+        }
+        .xp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #fef3c7, #fcd34d);
+            color: #92400e;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .streak-badge {
+            background: linear-gradient(135deg, #dcfce7, #86efac);
+            color: #166534;
+        }
+        .level-badge {
+            background: linear-gradient(135deg, #dbeafe, #93c5fd);
+            color: #1e40af;
+        }
+        
+        /* Installation steps - visual timeline */
+        .install-container {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: clamp(28px, 6vw, 40px);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 168, 150, 0.1);
+        }
+        .steps-timeline {
+            position: relative;
+            padding-left: clamp(20px, 4vw, 28px);
+            margin: clamp(24px, 5vw, 32px) 0;
+        }
+        .steps-timeline::before {
+            content: '';
+            position: absolute;
+            left: clamp(6px, 2vw, 10px);
+            top: 8px;
+            bottom: 8px;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+        .step {
+            position: relative;
+            padding-left: clamp(24px, 5vw, 36px);
+            padding-bottom: clamp(24px, 5vw, 32px);
+        }
+        .step:last-child {
+            padding-bottom: 0;
+        }
+        .step-number {
+            position: absolute;
+            left: clamp(-4px, 0vw, 0px);
+            top: 0;
+            width: clamp(32px, 7vw, 40px);
+            height: clamp(32px, 7vw, 40px);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
+            z-index: 1;
+        }
+        .step-content h4 {
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            font-weight: 700;
+            margin-bottom: clamp(6px, 1.5vw, 8px);
+            color: var(--dark);
+        }
+        .step-content p, .step-content a {
+            color: #475569;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            line-height: 1.5;
+        }
+        .step-content a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .step-content a:hover {
+            text-decoration: underline;
+        }
+        .code-snippet {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: clamp(12px, 3vw, 16px);
+            border-radius: 12px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            margin: clamp(12px, 3vw, 16px) 0;
+            overflow-x: auto;
+        }
+        
+        /* Use cases - colorful cards */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: clamp(16px, 3vw, 20px);
+        }
+        .usecase-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: clamp(20px, 4vw, 24px);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease;
+            border-top: 4px solid var(--primary);
+        }
+        .usecase-card:nth-child(2) { border-top-color: var(--secondary); }
+        .usecase-card:nth-child(3) { border-top-color: var(--accent); }
+        .usecase-card:nth-child(4) { border-top-color: #7209b7; }
+        .usecase-card:nth-child(5) { border-top-color: #4361ee; }
+        .usecase-card:nth-child(6) { border-top-color: #f72585; }
+        
+        .usecase-card:hover {
+            transform: translateY(-4px);
+        }
+        .usecase-icon {
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            margin-bottom: clamp(12px, 3vw, 16px);
+        }
+        .usecase-card h4 {
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            font-weight: 700;
+            margin-bottom: clamp(8px, 2vw, 12px);
+            color: var(--dark);
+        }
+        .usecase-card p {
+            color: #64748b;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+        
+        /* Learning journey visualization */
+        .journey-container {
+            background: linear-gradient(135deg, #f0fdfa, #fff);
+            border-radius: var(--radius-lg);
+            padding: clamp(24px, 5vw, 32px);
+            margin: clamp(24px, 5vw, 40px) 0;
+            border: 1px solid rgba(0, 168, 150, 0.15);
+        }
+        .journey-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(12px, 3vw, 20px);
+            margin-top: clamp(20px, 4vw, 28px);
+        }
+        .journey-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 140px;
+            max-width: 180px;
+        }
+        .journey-circle {
+            width: clamp(60px, 14vw, 72px);
+            height: clamp(60px, 14vw, 72px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            margin-bottom: clamp(8px, 2vw, 12px);
+            box-shadow: 0 4px 15px rgba(0, 168, 150, 0.3);
+        }
+        .journey-step span {
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            color: #475569;
+            text-align: center;
+            font-weight: 500;
+        }
+        .journey-arrow {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: var(--accent);
+            align-self: center;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark), #0f2540);
+            border-radius: var(--radius-lg);
+            padding: clamp(32px, 7vw, 48px) clamp(20px, 4vw, 32px);
+            text-align: center;
+            color: white;
+            margin: clamp(32px, 7vw, 48px) 0;
+        }
+        .cta-section h3 {
+            font-size: clamp(1.5rem, 5vw, 2.1rem);
+            font-weight: 800;
+            margin-bottom: clamp(12px, 3vw, 16px);
+        }
+        .cta-section p {
+            font-size: clamp(1rem, 3vw, 1.15rem);
+            opacity: 0.95;
+            max-width: 650px;
+            margin: 0 auto clamp(24px, 5vw, 32px);
+            line-height: 1.5;
+        }
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(12px, 3vw, 16px);
+            margin: clamp(20px, 4vw, 28px) 0;
+        }
+        .cta-note {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: clamp(10px, 2.5vw, 14px) clamp(20px, 4vw, 28px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            padding: clamp(32px, 7vw, 48px) 0 clamp(24px, 5vw, 32px);
+            text-align: center;
+            color: #64748b;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            line-height: 1.6;
+        }
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        footer a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+        .footer-es {
+            margin-top: clamp(16px, 4vw, 24px);
+            padding-top: clamp(16px, 4vw, 24px);
+            border-top: 1px solid #e2e8f0;
+            font-style: italic;
+            color: var(--secondary);
+        }
+        
+        /* Mobile CTA */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: clamp(16px, 3vw, 24px);
+            left: clamp(16px, 3vw, 24px);
+            right: clamp(16px, 3vw, 24px);
+            z-index: 999;
+            padding: clamp(10px, 2.5vw, 14px);
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(80px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .mobile-cta .btn {
+            width: 100%;
+            padding: clamp(12px, 3vw, 14px);
+            font-size: clamp(0.95rem, 3vw, 1rem);
+        }
+        
+        /* Quick links bar */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 12px);
+            padding: clamp(12px, 3vw, 16px);
+            background: white;
+            border-radius: var(--radius);
+            margin: clamp(20px, 5vw, 32px) 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 168, 150, 0.1);
+        }
+        .quick-links .btn {
+            padding: clamp(8px, 2vw, 10px) clamp(14px, 3vw, 18px);
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-cta .btn {
+                flex: 1;
+                min-width: 150px;
+                max-width: 280px;
+            }
+            .step {
+                padding-left: clamp(32px, 7vw, 44px);
+            }
+            .journey-arrow {
+                transform: rotate(90deg);
+            }
+            .cta-buttons .btn {
+                flex: 1;
+                min-width: 160px;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .features-grid,
+            .usecase-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-links {
+                flex-direction: column;
+            }
+            .quick-links .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-cta { display: block; }
+            .desktop-only { display: none; }
+        }
+        @media (min-width: 769px) {
+            .mobile-only { display: none; }
+        }
+        
+        /* Accessibility */
+        .btn:focus, a:focus, input:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-decoration" aria-hidden="true"></div>
+
+<div class="container">
+    <!-- Header -->
+    <nav class="navbar" aria-label="Главная навигация">
+        <a href="#" class="logo">
+            <div class="logo-icon">🌴</div>
+            <div class="logo-text">
+                <h1>Feekool Español</h1>
+                <p>Учи испанский с удовольствием</p>
+            </div>
+        </a>
+        <div class="nav-actions">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-secondary">🇪🇸 Demo</a>
+            <a href="#install" class="btn btn-ghost">📚 Инструкция</a>
+            <a href="#contact" class="btn btn-primary">✉️ Связаться</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-badge">
+            🎉 ¡Nuevo! Готовый шаблон для курсов испанского
+        </div>
+        <h2 id="hero-title">
+            Твоё сообщество для изучения испанского
+            <span class="highlight">быстро, бесплатно, с душой</span>
+        </h2>
+        <p>Создай форум за 1 минуту — и начни учить испанский в кругу единомышленников. Практика, материалы, поддержка — всё в одном месте.</p>
+        
+        <div class="hero-cta">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-lg btn-full-mobile">
+                🚀 Попробовать демо
+            </a>
+            <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-secondary btn-lg btn-full-mobile">
+                📦 Взять шаблон
+            </a>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-value">1 мин</span>
+                <span class="stat-label">на запуск</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">🆓</span>
+                <span class="stat-label">бесплатно</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">♾️</span>
+                <span class="stat-label">обновления</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">🇪🇸</span>
+                <span class="stat-label">испанский</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spanish phrase banner -->
+    <div class="phrase-banner" role="note" aria-label="Испанская фраза дня">
+        <div class="es-phrase">"Cada día es una nueva oportunidad para aprender"</div>
+        <div class="es-translation">Каждый день — новая возможность учиться ✨</div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="quick-links" role="navigation" aria-label="Быстрые ссылки">
+        <a href="https://feekool.github.io" target="_blank" class="btn btn-ghost">👁️ Демо-форум</a>
+        <a href="#features" class="btn btn-ghost">✨ Возможности</a>
+        <a href="#install" class="btn btn-ghost">⚡ Установка</a>
+        <a href="#usecases" class="btn btn-ghost">🎯 Идеи</a>
+        <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-ghost">🐙 GitHub</a>
+    </div>
+
+    <!-- Features -->
+    <section class="section" id="features" aria-labelledby="features-title">
+        <div class="section-header">
+            <h2 id="features-title" class="section-title">🌟 Почему студенты выбирают Feekool?</h2>
+            <p class="section-subtitle">Платформа, которая делает изучение испанского увлекательным и эффективным</p>
+        </div>
+        
+        <div class="features-grid">
+            <article class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Говори с первого дня</h3>
+                <p>Темы для практики: «¡Hola! ¿Cómo estás?», «Mi rutina diaria», «Planes para el fin de semana». Пиши — получай обратную связь.</p>
+                <div class="badge-row">
+                    <span class="xp-badge">+10 XP за пост</span>
+                    <span class="streak-badge">🔥 3 дня подряд</span>
+                </div>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-secondary">👉 Демо: Практика</a>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Учись как в игре</h3>
+                <p>Челленджи, бейджи, уровни. «7 дней без ошибок», «100 слов за неделю», «Мастер субхунтиво» — мотивация в каждом посте!</p>
+                <div class="badge-row">
+                    <span class="level-badge">🏆 Уровень B1</span>
+                    <span class="xp-badge">+50 XP за челлендж</span>
+                </div>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-secondary">🎮 Демо: Геймификация</a>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Всё в одном месте</h3>
+                <p>Уроки, грамматика, аудио, видео, тесты — организовано по темам и уровням. Никакого хаоса в чатах.</p>
+                <div class="badge-row">
+                    <span class="level-badge">📚 A1 → C1</span>
+                    <span class="xp-badge">🔍 Поиск по материалам</span>
+                </div>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-secondary">📚 Демо: Материалы</a>
+            </article>
+            
+            <article class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Друзья по обучению</h3>
+                <p>Находи партнёров для практики, создавай мини-группы, обменивайся опытом. Учиться вместе — веселее и эффективнее!</p>
+                <div class="badge-row">
+                    <span class="streak-badge">👯 12 партнёров</span>
+                    <span class="xp-badge">💬 +5 XP за помощь</span>
+                </div>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-secondary">👥 Демо: Сообщество</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Learning Journey -->
+    <section class="section" aria-labelledby="journey-title">
+        <div class="section-header">
+            <h2 id="journey-title" class="section-title">🗺️ Твой путь к свободному испанскому</h2>
+            <p class="section-subtitle">Feekool помогает пройти каждый этап с поддержкой и прогрессом</p>
+        </div>
+        
+        <div class="journey-container">
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="journey-circle">1</div>
+                    <span>Знакомство 🤝</span>
+                </div>
+                <div class="journey-arrow">→</div>
+                <div class="journey-step">
+                    <div class="journey-circle">2</div>
+                    <span>Первые фразы 💬</span>
+                </div>
+                <div class="journey-arrow">→</div>
+                <div class="journey-step">
+                    <div class="journey-circle">3</div>
+                    <span>Грамматика 📐</span>
+                </div>
+                <div class="journey-arrow">→</div>
+                <div class="journey-step">
+                    <div class="journey-circle">4</div>
+                    <span>Свободное общение 🎉</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px dashed rgba(0,168,150,0.3);">
+                <p style="color: #475569; margin-bottom: 16px;">
+                    <strong>💡 Совет:</strong> Создай раздел «Mi progreso» — записывай, что выучил сегодня. Через месяц увидишь огромный прогресс!
+                </p>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-accent">🎯 Начать путь сейчас</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section class="section" id="install" aria-labelledby="install-title">
+        <div class="section-header">
+            <h2 id="install-title" class="section-title">⚡ Установка за 60 секунд</h2>
+            <p class="section-subtitle">Простые шаги — и твой форум для испанского готов</p>
+        </div>
+        
+        <div class="install-container">
+            <div class="steps-timeline">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>GitHub аккаунт</h4>
+                        <p>Зарегистрируйся бесплатно на <a href="https://github.com" target="_blank">github.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Открой шаблон</h4>
+                        <p>Перейди на <a href="https://github.com/feekool/feekool.github.io" target="_blank">feekool.github.io</a> — это наш готовый шаблон для испанского</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Создай свой репозиторий</h4>
+                        <p>Нажми <strong>"Use this template"</strong> → <strong>"Create a new repository"</strong><br>
+                        Назови, например: <code>mi-curso-espanol</code> или <code>spanish-club</code></p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Включи GitHub Pages</h4>
+                        <p>Settings → Pages → Branch: <code>main</code> → Save<br>
+                        <small>Через 1-2 минуты форум будет доступен по ссылке вида:</small><br>
+                        <code class="code-snippet">https://твой-ник.github.io/ми-курсо-эспаньол</code></p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>🇪🇸 Настрой под испанский!</h4>
+                        <p>Отредактируй файлы в своём репозитории:<br>
+                        • <code>index.md</code> — приветствие «¡Bienvenidos!»<br>
+                        • <code>config.json</code> — названия разделов на испанском<br>
+                        • Добавь уровни: A1, A2, B1...<br>
+                        <strong>Готово! ¡Vamos!</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #f0fdfa; border-radius: 16px; padding: clamp(16px, 3vw, 20px); margin-top: 24px; border-left: 4px solid var(--primary);">
+                <p style="margin: 0; color: #065f46; font-weight: 500;">
+                    💡 <strong>Pro tip:</strong> В шаблоне уже есть пример структуры: «Gramática», «Vocabulario», «Práctica», «Cultura». Просто раскомментируй и наполняй!
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 28px;">
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-lg" style="margin-bottom: 12px;">
+                    👁️ Сначала посмотри демо!
+                </a><br>
+                <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-secondary btn-lg">
+                    ⚡ Создать свой форум
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="section" id="usecases" aria-labelledby="usecases-title">
+        <div class="section-header">
+            <h2 id="usecases-title" class="section-title">🎯 Как использовать для испанского</h2>
+            <p class="section-subtitle">Вдохновляйся идеями или создай свой уникальный формат</p>
+        </div>
+        
+        <div class="usecase-grid">
+            <div class="usecase-card">
+                <div class="usecase-icon">🎓</div>
+                <h4>Онлайн-курс</h4>
+                <p>Уроки по неделям, домашние задания, вопросы в комментариях</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon">☕</div>
+                <h4>Разговорный клуб</h4>
+                <p>Еженедельные темы: «Viajes», «Cine», «Recetas latinas»</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon">📖</div>
+                <h4>Чтение вслух</h4>
+                <p>Короткие тексты, стихи, новости — пиши и получай фидбек</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon">🎧</div>
+                <h4>Аудио-дневник</h4>
+                <p>Записывай голосовые, пиши транскрипты — улучшай произношение</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon">🌎</div>
+                <h4>Культурный уголок</h4>
+                <p>Традиции, праздники, музыка Испании и Латинской Америки</p>
+            </div>
+            <div class="usecase-card">
+                <div class="usecase-icon">🏆</div>
+                <h4>Челленджи</h4>
+                <p>«30 días de español», «100 palabras nuevas», «Sin traductor»</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 32px;">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-accent btn-lg">
+                🎨 Посмотреть все примеры в демо
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <h3 id="cta-title">¡Empieza hoy! 🚀</h3>
+        <p>Не жди «идеального момента». Создай форум сейчас — и начни учить испанский так, как удобно именно тебе.</p>
+        
+        <div class="cta-buttons">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-lg">
+                👁️ Открыть демо
+            </a>
+            <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-secondary btn-lg">
+                📦 Взять шаблон
+            </a>
+            <a href="https://github.com/feekool/feekool.github.io/issues" target="_blank" class="btn btn-ghost btn-lg" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">
+                💬 Вопрос?
+            </a>
+        </div>
+        
+        <div class="cta-note">
+            ✨ Бесплатная помощь в настройке! Напиши — поможем адаптировать под твой курс
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <div style="display: flex; justify-content: center; gap: clamp(12px, 3vw, 20px); flex-wrap: wrap; margin: clamp(24px, 5vw, 40px) 0;">
+        <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-lg">
+            🎯 Демо для испанского
+        </a>
+        <a href="https://feekool.github.io" target="_blank" class="btn btn-secondary btn-lg">
+            👁️ Предпросмотр
+        </a>
+        <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-ghost btn-lg">
+            🐙 Исходный код
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© Feekool Español — форум на GitHub Pages для изучения испанского языка.<br>
+        Open-source шаблон • Бесплатно • Без серверов</p>
+        <p style="margin-top: 12px;">
+            Готовые решения для репетиторов, школ и клубов — 
+            <a href="https://feekool.github.io/" target="_blank">свяжитесь с нами</a>
+        </p>
+        <p class="footer-es">
+            "El que no arriesga, no gana" • Кто не рискует, тот не пьёт шампанское 🥂
+        </p>
+        <p style="margin-top: 16px;">
+            <a href="https://feekool.github.io" target="_blank" style="color: var(--primary); font-weight: 700;">
+                🇪🇸 ¡Abre el demo y empieza a aprender!
+            </a>
+        </p>
+    </footer>
+</div>
+
+<!-- Mobile CTA -->
+<div class="mobile-cta" role="navigation" aria-label="Быстрый доступ">
+    <a href="https://feekool.github.io" target="_blank" class="btn btn-primary">
+        🚀 ¡Abrir demo de español!
+    </a>
+</div>
+
+<!-- Simple script for smooth scroll and mobile CTA -->
+<script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+    
+    // Mobile CTA scroll behavior
+    const mobileCta = document.querySelector('.mobile-cta');
+    if (mobileCta) {
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 400 && currentScroll > lastScroll) {
+                mobileCta.style.transform = 'translateY(0)';
+                mobileCta.style.opacity = '1';
+            } else if (currentScroll < 150) {
+                mobileCta.style.transform = 'translateY(100px)';
+                mobileCta.style.opacity = '0';
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+    }
+</script>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Feekool Español",
+  "description": "Создай форум для изучения испанского языка на GitHub Pages. Курсы, практика, сообщество — без серверов и сложной настройки.",
+  "educationalLevel": ["Beginner", "Intermediate", "Advanced"],
+  "inLanguage": ["es", "ru"],
+  "learningResourceType": "Forum",
+  "teaches": ["Spanish language", "Grammar", "Vocabulary", "Conversation"],
+  "url": "https://feekool.github.io",
+  "isAccessibleForFree": true,
+  "keywords": "испанский язык, учить испанский, онлайн-курс, разговорная практика, испанский с нуля, испанский форум, изучение языков"
+}
+</script>
+
+</body>
+</html>
